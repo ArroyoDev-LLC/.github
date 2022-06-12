@@ -1,7 +1,7 @@
 <div align="center">
 
-![logo](../assets/logo.svg)
+![logo](/assets/logo.svg)
 
-ArroyoDev LLC
+# ArroyoDev LLC
 
 </div>
