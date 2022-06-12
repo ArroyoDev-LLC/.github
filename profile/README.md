@@ -1,6 +1,8 @@
 <div align="center">
 
-![logo](/assets/logo.svg)
+<img src="assets/logo.svg" width="200">
+
+&nbsp;
 
 # ArroyoDev LLC
 
