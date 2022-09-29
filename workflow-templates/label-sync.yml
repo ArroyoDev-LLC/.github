@@ -1,0 +1,18 @@
+name: Setup Label Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      extra-labels:
+        description: "Yaml array of extra labels to add."
+        required: false
+
+
+jobs:
+  sync:
+    uses: ArroyoDev-LLC/.github/.github/workflows/sync-labels.yml
+    with:
+      labels: ${{ inputs.extra-labels }}
+      repositories: ${{ github.repository }}
+    secrets:
+      access-token: ${{ secrets.GITHUB_TOKEN }}
