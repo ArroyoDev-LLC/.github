@@ -2,7 +2,7 @@
 name: New Epic
 about: Create a new issue that tracks a related set of sub issues.
 title: 'EPIC: '
-labels: ''
+labels: kind/epic
 assignees: ''
 
 ---
