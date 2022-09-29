@@ -10,7 +10,7 @@ on:
 
 jobs:
   sync:
-    uses: ArroyoDev-LLC/.github/.github/workflows/sync-labels.yml
+    uses: ArroyoDev-LLC/.github/.github/workflows/sync-labels.yml@main
     with:
       labels: ${{ inputs.extra-labels }}
       repositories: ${{ github.repository }}
