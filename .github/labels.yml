@@ -1,0 +1,42 @@
+- color: 3B5BDB
+  description: Something broke.
+  name: kind/bug
+- color: 3B5BDB
+  description: New feature or improvement.
+  name: kind/feature
+- color: 3B5BDB
+  description: A high-level initiative that has many subtasks.
+  name: kind/epic
+- color: 3B5BDB
+  description: Improvements or additions to documentation.
+  name: kind/docs
+- color: ee0000
+  description: More information needed.
+  name: bug/unknown
+- color: ee0000
+  description: Confirmed and reproducable.
+  name: bug/confirmed
+- color: ee0000
+  description: Regression of older bug.
+  name: bug/regression
+- color: 27CF79
+  description: We've seen this issue but we're not sure how long it will take.
+  name: size/unknown
+- color: 27CF79
+  description: Estimated to take days to complete.
+  name: size/s
+- color: 27CF79
+  description: Estimated to take weeks to complete.
+  name: size/m
+- color: FDF4E8
+  description: UI/UX functionality.
+  name: team/ui
+- color: FDF4E8
+  description: Stateful flow / backend logic.
+  name: team/logic
+- color: FDF4E8
+  description: Continuous integration / delivery.
+  name: team/ci+cd
+- color: FDF4E8
+  description: Design mockups / assets / other.
+  name: team/design
