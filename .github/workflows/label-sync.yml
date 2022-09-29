@@ -1,0 +1,25 @@
+name: Setup Label Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      prune:
+        description: Remove other labels not in manifest.
+        required: true
+        type: boolean
+        default: false
+  push:
+    branches: [ "main" ]
+    paths: [ .github/labels.yml ]
+      
+
+jobs:
+  sync:
+    uses: ArroyoDev-LLC/.github/.github/workflows/sync-labels.yml@main
+    name: Create Labels
+    with:
+      repositories: ${{ github.repository }}
+      # only allows prune with dispatch.
+      prune: ${{ inputs.prune }}
+    secrets:
+      access-token: ${{ secrets.GITHUB_TOKEN }}
