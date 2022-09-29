@@ -7,10 +7,11 @@ on:
         type: string
         required: true
         description: Repositories to apply labels to.
-      labels:
-        type: string
-        description: Extra labels to add.
+      prune:
+        type: boolean
+        default: false
         required: false
+        description: Remove any other labels not in manifest. 
     secrets:
       access-token:
         required: true
@@ -21,16 +22,22 @@ jobs:
     runs-on: ubuntu-latest
     name: Sync Labels
     steps:
-      - uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
+      
       - name: Create manifest
-        if: inputs.labels
         run: |
-          echo "${{ inputs.labels }}" > new-labels.yml
-          yq ea 'select(fi == 0) * select(fi == 1)' .github/labels.yml new-labels.yml > .github/labels.yml
+          curl -sSL -o org-labels.yml  https://raw.githubusercontent.com/ArroyoDev-LLC/.github/main/.github/labels.yml
+          if [[ -f .github/labels.yml ]]; then
+            echo "Found local labels manifest, merging with organizations..."
+            yq ea 'select(fi == 0) * select(fi == 1)' .github/labels.yml org-labels.yml > labels-manifest.yml
+          else
+            echo "Using organization label defaults..."
+            mv org-labels.yml labels-manifest.yml
+          fi
         
       - uses: micnncim/action-label-syncer@v1
         with:
-          manifest: .github/labels.yml
+          manifest: labels-manifest.yml
           repository: ${{ inputs.repositories }}
+          prune: ${{ inputs.prune }}
           token: ${{ secrets.access-token }}
