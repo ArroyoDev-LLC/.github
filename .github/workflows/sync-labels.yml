@@ -1,0 +1,36 @@
+name: Sync labels
+
+on:
+  workflow_call:
+    inputs:
+      repositories:
+        type: string
+        required: true
+        description: Repositories to apply labels to.
+      labels:
+        type: string
+        description: Extra labels to add.
+        required: false
+    secrets:
+      access-token:
+        required: true
+        description: Github Access Token
+        
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: Sync Labels
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create manifest
+        if: inputs.labels
+        run: |
+          echo "${{ inputs.labels }}" > new-labels.yml
+          yq ea 'select(fi == 0) * select(fi == 1)' .github/labels.yml new-labels.yml > .github/labels.yml
+        
+      - uses: micnncim/action-label-syncer@v1
+        with:
+          manifest: .github/labels.yml
+          repository: ${{ inputs.repositories }}
+          token: ${{ secrets.access-token }}
