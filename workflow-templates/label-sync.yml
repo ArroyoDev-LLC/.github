@@ -3,16 +3,23 @@ name: Setup Label Sync
 on:
   workflow_dispatch:
     inputs:
-      extra-labels:
-        description: "Yaml array of extra labels to add."
-        required: false
-
+      prune:
+        description: Remove other labels not in manifest.
+        required: true
+        type: boolean
+        default: false
+  push:
+    branches: [ $default-branch ]
+    paths: [ .github/labels.yml ]
+      
 
 jobs:
   sync:
     uses: ArroyoDev-LLC/.github/.github/workflows/sync-labels.yml@main
+    name: Create Labels
     with:
-      labels: ${{ inputs.extra-labels }}
       repositories: ${{ github.repository }}
+      # only allows prune with dispatch.
+      prune: ${{ inputs.prune }}
     secrets:
       access-token: ${{ secrets.GITHUB_TOKEN }}
