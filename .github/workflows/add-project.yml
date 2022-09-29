@@ -7,10 +7,6 @@ on:
         type: number
         description: Github Project Number
         required: true
-    secrets:
-      access-token:
-        required: true
-        description: Github access token.
           
 jobs:
   add-to-project:
@@ -22,4 +18,4 @@ jobs:
           # You can target a repository in a different organization
           # to the issue
           project-url: https://github.com/orgs/ArroyoDev-LLC/projects/${{ inputs.project-number }}
-          github-token: ${{ secrets.access-token }}
+          github-token: ${{ secrets.ORG_ADD_PROJECT_PAT }}
